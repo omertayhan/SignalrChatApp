@@ -3,20 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SignalrChatApp.Data;
 
 #nullable disable
 
-namespace SignalrChatApp.Migrations
+namespace SignalrChatApp.Migrations.IdentityUserDb
 {
-    [DbContext(typeof(AppDbContext))]
-    [Migration("20240515224738_InitialMigration")]
-    partial class InitialMigration
+    [DbContext(typeof(IdentityUserDbContext))]
+    partial class IdentityUserDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

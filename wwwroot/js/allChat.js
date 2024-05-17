@@ -26,5 +26,20 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     connection.invoke("SendMessage", user, message).catch(function (err) {
         return console.error(err.toString());
     });
+
+    // Mesajı veritabanına kaydet
+    fetch("/Home/SaveMessage", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            SenderUser: user,
+            message: message
+        })
+    }).catch(function (err) {
+        return console.error(err.toString());
+    });
+
     event.preventDefault();
 });
