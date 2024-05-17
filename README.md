@@ -1,3 +1,7 @@
+## Project Detail
+
+Using .NET Core 8 Entity Framework and SignalR enables general, group-based, and private communication options.
+
 # Project Setup Guide
 
 To run this project on your system, ensure that you have the following prerequisites installed:
