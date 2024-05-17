@@ -12,7 +12,7 @@ using SignalrChatApp.Data;
 namespace SignalrChatApp.Migrations.IdentityUserDb
 {
     [DbContext(typeof(IdentityUserDbContext))]
-    [Migration("20240516232823_InitialCreate")]
+    [Migration("20240517184627_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

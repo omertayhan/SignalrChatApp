@@ -3,11 +3,11 @@
 var connection = new signalR.HubConnectionBuilder().withUrl('/chatHub').build();
 
 connection.on("Send", function (message) {
-    $("#messageList").append(`<li>${message}</li>`);
+    $("#messageList").append(`<li class="list-group-item">${message}</li>`);
 });
 
 connection.on("ReceiveMessage", (u, m) => {
-    $("#messageList").append(`<li class="active"><span>${u}</span>: ${m}</li>`);
+    $("#messageList").append(`<li class="list-group-item"><span>${u}</span>: ${m}</li>`);
 });
 
 document.getElementById("groupmsg").addEventListener("click", async (event) => {

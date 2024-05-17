@@ -4,7 +4,6 @@
     {
         public Guid MessageId { get; set; }
         public string Message { get; set; }
-        public string HashedMessage { get; set; }
         public string MessageType { get; set; }
         public string MessageGroupId { get; set; }
         public string SenderUser { get; set; }

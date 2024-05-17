@@ -17,7 +17,6 @@ namespace SignalrChatApp.Migrations
                 {
                     MessageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    HashedMessage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MessageType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MessageGroupId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SenderUser = table.Column<string>(type: "nvarchar(max)", nullable: true),

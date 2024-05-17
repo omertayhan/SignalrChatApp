@@ -12,7 +12,7 @@ using SignalrChatApp.Data;
 namespace SignalrChatApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240516232816_InitialCreate")]
+    [Migration("20240517184614_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -33,9 +33,6 @@ namespace SignalrChatApp.Migrations
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("HashedMessage")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");

@@ -31,9 +31,6 @@ namespace SignalrChatApp.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("HashedMessage")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 

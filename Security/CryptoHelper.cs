@@ -35,8 +35,9 @@ namespace ChatRooms.Security
             return Convert.ToBase64String(array);
         }
 
-        public static string DecryptString(string key, string cipherText)
+        public static string DecryptString(string cipherText)
         {
+            var key = "b14ca5898a4e4133bbce2ea2315a1916";
             byte[] iv = new byte[16];
             byte[] buffer = Convert.FromBase64String(cipherText);
 

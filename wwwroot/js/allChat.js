@@ -7,11 +7,9 @@ document.getElementById("sendButton").disabled = true;
 
 connection.on("ReceiveMessage", function (user, message) {
     var li = document.createElement("li");
+    li.classList.add("list-group-item"); // Class ekle
     document.getElementById("messagesList").appendChild(li);
-    // We can assign user-supplied strings to an element's textContent because it
-    // is not interpreted as markup. If you're assigning in any other way, you 
-    // should be aware of possible script injection concerns.
-    li.textContent = `${user} says ${message}`;
+    li.textContent = `${user} : ${message}`;
 });
 
 connection.start().then(function () {
@@ -23,7 +21,14 @@ connection.start().then(function () {
 document.getElementById("sendButton").addEventListener("click", function (event) {
     var user = document.getElementById("userInput").value;
     var message = document.getElementById("messageInput").value;
-    connection.invoke("SendMessage", user, message).catch(function (err) {
+
+    // Tarih ve saat bilgisi ekle
+    var currentDate = new Date();
+    var timestamp = currentDate.toISOString(); // ISO formatında string
+
+    var fullMessage = `${timestamp} - ${message}`;
+
+    connection.invoke("SendMessage", user, fullMessage).catch(function (err) {
         return console.error(err.toString());
     });
 
@@ -35,7 +40,8 @@ document.getElementById("sendButton").addEventListener("click", function (event)
         },
         body: JSON.stringify({
             SenderUser: user,
-            message: message
+            message: message,
+            CreatedTime: timestamp
         })
     }).catch(function (err) {
         return console.error(err.toString());

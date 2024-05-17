@@ -18,14 +18,23 @@ public class HomeController : Controller
     {
         _dbContext = dbContext;
     }
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
-    }
+        var messages = await _dbContext.GetMessagesAsync();
 
-    public IActionResult GroupChat()
-    {
-        return View();
+        // Mesajları alırken MessagesVM türüne dönüştür
+        var messagesVM = messages.Select(m => new MessagesVM
+        {
+            MessageId = m.MessageId,
+            Message = CryptoHelper.DecryptString(m.Message),
+            MessageType = m.MessageType,
+            MessageGroupId = m.MessageGroupId,
+            SenderUser = m.SenderUser,
+            ReceiverUser = m.ReceiverUser,
+            CreatedTime = m.CreatedTime
+        }).ToList();
+
+        return View(messagesVM);
     }
 
     [HttpPost]
@@ -41,15 +50,13 @@ public class HomeController : Controller
             var message = new Messages
             {
                 MessageId = Guid.NewGuid(),
-                Message = model.Message,
-                HashedMessage = CryptoHelper.EncryptString(model.Message),
+                Message = CryptoHelper.EncryptString(model.Message),
                 MessageType = MessageTypes.Public.ToString(),
                 MessageGroupId = null,
                 SenderUser = model.SenderUser,
                 ReceiverUser = null,
-                CreatedTime = DateTime.Now
+                CreatedTime = model.CreatedTime
             };
-
 
             _dbContext.Messages.Add(message);
             await _dbContext.SaveChangesAsync();

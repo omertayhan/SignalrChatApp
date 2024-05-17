@@ -25,5 +25,10 @@ namespace SignalrChatApp.Data
             Messages.Add(message);
             await SaveChangesAsync();
         }
+
+        public async Task<List<Messages>> GetMessagesAsync()
+        {
+            return await Messages.OrderBy(m => m.CreatedTime).ToListAsync();
+        }
     }
 }
