@@ -57,6 +57,11 @@ document.getElementById("groupmsg").addEventListener("click", async (event) => {
     var groupName = document.getElementById("group-name").value;
     var userName = document.getElementById("user-name").value;
     var groupMsg = document.getElementById("group-message-text").value;
+
+    if (groupMsg === "") { // Eğer mesaj boşsa işlem yapma
+        return;
+    }
+
     try {
         connection.invoke("SendMessageToGroup", groupName, groupMsg, userName);
     }

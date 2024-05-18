@@ -39,6 +39,10 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     var user = document.getElementById("userInput").value;
     var message = document.getElementById("messageInput").value;
 
+    if (message === "") { // Eğer mesaj boşsa işlem yapma
+        return;
+    }
+
     var fullMessage = ` ${message}`;
 
     connection.invoke("SendMessage", user, fullMessage).catch(function (err) {
