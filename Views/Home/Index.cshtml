@@ -14,39 +14,37 @@
 <div class="container">
     <h2 class="display-4 mb-5">Public Channel</h2>
 
-    <div class="row mb-3">
-        <div class="col-md-1">User</div>
-        <div class="col-md-5">
+    <div class="form-group row mb-3">
+        <label for="userInput" class="col-sm-2 col-form-label">User</label>
+        <div class="col-sm-10">
             <input type="text" id="userInput" class="form-control" value="@User.Identity!.Name" disabled />
         </div>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-md-1">Message</div>
-        <div class="col-md-5">
+    <div class="form-group row mb-3">
+        <label for="messageInput" class="col-sm-2 col-form-label">Message</label>
+        <div class="col-sm-10">
             <input type="text" class="form-control" id="messageInput" />
         </div>
     </div>
 
-    <div class="row mb-3">
-        <div class="col-md-6 text-md-end">
+    <div class="form-group row mb-3">
+        <div class="col-sm-10 offset-sm-2">
             <button type="button" id="sendButton" class="btn btn-primary">Send Message</button>
         </div>
     </div>
 
     <hr class="mb-4">
-
     <div class="row">
         <div class="col-md-12">
             <ul id="dbmessagesList" class="list-group messages-list">
                 @foreach (var message in Model)
                 {
                     <li class="list-group-item">
-                        <small class="text-muted">@message.CreatedTime </small><strong> @message.SenderUser: </strong> @message.Message
+                        <small class="text-muted">@message.CreatedTime</small> <strong>@message.SenderUser:</strong> @message.Message
                     </li>
                 }
             </ul>
-            @* <ul id="messagesList" class="list-group"></ul> *@
         </div>
     </div>
 </div>

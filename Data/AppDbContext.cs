@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SignalrChatApp.Common;
 using SignalrChatApp.Models;
 
 namespace SignalrChatApp.Data
@@ -29,6 +30,13 @@ namespace SignalrChatApp.Data
         public async Task<List<Messages>> GetMessagesAsync()
         {
             return await Messages.OrderBy(m => m.CreatedTime).ToListAsync();
+        }
+
+        public async Task<List<Messages>> GetMessagesByGroupId(string messageGroupId)
+        {
+            return await Messages.OrderBy(m => m.CreatedTime)
+                                 .Where(m => m.MessageGroupId == messageGroupId && m.MessageType == MessageTypes.Group.ToString())
+                                 .ToListAsync();
         }
     }
 }
