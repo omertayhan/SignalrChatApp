@@ -5,9 +5,20 @@
     "iisExpress": {
       "applicationUrl": "http://localhost:54305",
       "sslPort": 44307
+    },
+    "iis": {
+      "applicationUrl": "http://www.devchatroom.com"
     }
   },
   "profiles": {
+    "Local IIS": {
+      "commandName": "IIS",
+      "launchBrowser": true,
+      "launchUrl": "http://www.devchatroom.com",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
     "http": {
       "commandName": "Project",
       "dotnetRunMessages": true,

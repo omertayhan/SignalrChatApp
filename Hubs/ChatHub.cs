@@ -26,17 +26,17 @@ namespace SignalrChatApp.Hubs
 
         public Task SendMessageToGroup(string groupName, string message, string userName)
         {
-            return Clients.Group(groupName).SendAsync("Send", $"{Context.ConnectionId}-{userName}: {message}");
+            return Clients.Group(groupName).SendAsync("Send", $"{userName}: {message}");
         }
         public async Task AddToGroup(string groupName, string userName)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
-            await Clients.Group(groupName).SendAsync("Send", $"{Context.ConnectionId}-{userName} : has joined the group {groupName}!!");
+            await Clients.Group(groupName).SendAsync("Send", $"{userName} : has joined the group {groupName}!!");
         }
-        public async Task RemoveFromGroup(string groupName)
+        public async Task RemoveFromGroup(string groupName, string userName)
         {
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
-            await Clients.Group(groupName).SendAsync("Send", $"{Context.ConnectionId} has left the group {groupName}");
+            await Clients.Group(groupName).SendAsync("Send", $"{userName} has left the group {groupName}");
         }
         public Task SendPrivateMessage(string user, string message)
         {

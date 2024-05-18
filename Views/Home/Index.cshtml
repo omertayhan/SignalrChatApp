@@ -3,6 +3,14 @@
     ViewData["Title"] = "Public Channel";
 }
 
+<style>
+    .messages-list {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+</style>
+
 <div class="container">
     <h2 class="display-4 mb-5">Public Channel</h2>
 
@@ -30,15 +38,15 @@
 
     <div class="row">
         <div class="col-md-12">
-            <ul id="dbmessagesList" class="list-group">
+            <ul id="dbmessagesList" class="list-group messages-list">
                 @foreach (var message in Model)
                 {
                     <li class="list-group-item">
-                        <small class="text-muted">@message.CreatedTime.ToShortTimeString() </small><strong> @message.SenderUser: </strong> @message.Message
+                        <small class="text-muted">@message.CreatedTime </small><strong> @message.SenderUser: </strong> @message.Message
                     </li>
                 }
             </ul>
-            <ul id="messagesList" class="list-group"></ul>
+            @* <ul id="messagesList" class="list-group"></ul> *@
         </div>
     </div>
 </div>

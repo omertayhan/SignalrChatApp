@@ -37,8 +37,9 @@ document.getElementById("join-group").addEventListener("click", async (event) =>
 
 document.getElementById("leave-group").addEventListener("click", async (event) => {
     var groupName = document.getElementById("group-name").value;
+    var userName = document.getElementById("user-name").value;
     try {
-        connection.invoke("RemoveFromGroup", groupName);
+        connection.invoke("RemoveFromGroup", groupName, userName);
     }
     catch (e) {
         console.error(e.toString());
