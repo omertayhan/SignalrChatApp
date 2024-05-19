@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl('/chatHub').build();
+var connection = new signalR.HubConnectionBuilder().withUrl('/GroupChatHub').build();
 
 connection.on("Send", function (message) {
     var groupName = document.getElementById("group-name").value;

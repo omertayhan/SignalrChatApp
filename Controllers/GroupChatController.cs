@@ -45,7 +45,6 @@ namespace SignalrChatApp.Controllers
             return Json(messagesVM);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> SaveMessage([FromBody] MessagesVM model)
         {
