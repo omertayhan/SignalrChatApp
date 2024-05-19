@@ -5,7 +5,20 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/privateChatHub").b
 // Disable send button until connection is established
 document.getElementById("sendToUser").disabled = true;
 
+connection.on("ReceiveOnlineUsers", function (onlineUsers) {
+    var onlineUsersList = document.getElementById("onlineUsersList");
+    onlineUsersList.innerHTML = '';
+
+    onlineUsers.forEach(user => {
+        var li = document.createElement('li');
+        li.classList.add('list-group-item');
+        li.textContent = user;
+        onlineUsersList.appendChild(li);
+    });
+});
+
 connection.on("ReceiveMessage", function (user, message) {
+
     var li = document.createElement("li");
     li.classList.add("list-group-item");
 
@@ -17,6 +30,9 @@ connection.on("ReceiveMessage", function (user, message) {
 });
 
 connection.start().then(function () {
+    connection.invoke("GetOnlineUsers").catch(function (err) {
+        return console.error(err.toString());
+    });
     connection.invoke("GetConnectionId").then(function (id) {
         document.getElementById("connectionId").value = id;
     });
@@ -44,6 +60,8 @@ document.getElementById("sendToUser").addEventListener("click", async function (
         // Eğer messages tanımlanmamışsa ya da boşsa, işlemi geç
         if (!messages || messages.length === 0) {
             console.log("Mesaj bulunamadı.");
+            await connection.invoke("SendToUser", user, receiverUserName, message);
+            scrollToBottom();
             return;
         }
 
@@ -55,9 +73,9 @@ document.getElementById("sendToUser").addEventListener("click", async function (
             li.innerHTML = `<small class="text-muted">${new Date(message.createdTime).toLocaleString()}</small> <strong>${message.senderUser}:</strong> ${message.message}`;
             document.getElementById('messagesList').appendChild(li);
         });
-
         await connection.invoke("SendToUser", user, receiverUserName, message);
         scrollToBottom();
+
     } catch (error) {
         console.error(error.toString());
     }

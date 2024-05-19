@@ -21,13 +21,21 @@ namespace SignalrChatApp.Hubs
         {
             string username = Context.User.Identity.Name;
             UserConnections[Context.ConnectionId] = username;
-            return base.OnConnectedAsync();
+            // Yeni bir kullanıcı bağlandığında, tüm istemcilere online kullanıcıları gönder
+            return SendOnlineUsersToClient();
         }
 
         public override Task OnDisconnectedAsync(Exception exception)
         {
             UserConnections.TryRemove(Context.ConnectionId, out _);
-            return base.OnDisconnectedAsync(exception);
+            // Bir kullanıcı ayrıldığında, tüm istemcilere online kullanıcıları gönder
+            return SendOnlineUsersToClient();
+        }
+
+        private async Task SendOnlineUsersToClient()
+        {
+            var onlineUsers = UserConnections.Values.Distinct();
+            await Clients.All.SendAsync("ReceiveOnlineUsers", onlineUsers);
         }
 
         public async Task SendToUser(string sender, string receiverUserName, string message)
@@ -70,6 +78,12 @@ namespace SignalrChatApp.Hubs
         {
             var orderedUsers = new List<string> { user1, user2 }.OrderBy(x => x).ToList();
             return $"room_{orderedUsers[0]}_{orderedUsers[1]}";
+        }
+
+        public async Task GetOnlineUsers()
+        {
+            var onlineUsers = UserConnections.Values.Distinct();
+            await Clients.Caller.SendAsync("ReceiveOnlineUsers", onlineUsers);
         }
     }
 }
