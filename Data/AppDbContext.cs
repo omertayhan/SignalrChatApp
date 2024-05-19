@@ -38,5 +38,12 @@ namespace SignalrChatApp.Data
                                  .Where(m => m.MessageGroupId == messageGroupId && m.MessageType == MessageTypes.Group.ToString())
                                  .ToListAsync();
         }
+
+        public async Task<List<Messages>> GetMessagesByPrivateGroupId(string messagePrivateGroupId)
+        {
+            return await Messages.OrderBy(m => m.CreatedTime)
+                                 .Where(m => m.MessageGroupId == messagePrivateGroupId && m.MessageType == MessageTypes.Private.ToString())
+                                 .ToListAsync();
+        }
     }
 }

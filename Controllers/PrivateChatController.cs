@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ChatRooms.Security;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SignalrChatApp.Data;
 using SignalrChatApp.Models;
+using SignalrChatApp.ViewModels;
 
 namespace SignalrChatApp.Controllers
 {
@@ -24,10 +26,25 @@ namespace SignalrChatApp.Controllers
 
         public IList<Messages> MessagesList { get; set; }
 
-        public async Task OnGetAsync(string user1, string user2)
+        [HttpPost]
+        public async Task<JsonResult> GetMessages([FromBody] MessagesVM model)
         {
-            string roomName = GetRoomName(user1, user2);
-            MessagesList = await _context.GetMessagesByGroupId(roomName);
+            string roomName = GetRoomName(model.SenderUser, model.ReceiverUser);
+            var messages = await _context.GetMessagesByPrivateGroupId(roomName);
+
+            // Mesajları MessagesViewModel listesine dönüştür
+            var messagesViewModel = messages.Select(m => new MessagesVM
+            {
+                MessageId = m.MessageId,
+                Message = CryptoHelper.DecryptString(m.Message),
+                MessageType = m.MessageType,
+                MessageGroupId = m.MessageGroupId,
+                SenderUser = m.SenderUser,
+                ReceiverUser = m.ReceiverUser,
+                CreatedTime = m.CreatedTime
+            }).ToList();
+
+            return new JsonResult(messagesViewModel);
         }
 
         private string GetRoomName(string user1, string user2)

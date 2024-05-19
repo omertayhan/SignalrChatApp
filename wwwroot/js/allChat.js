@@ -73,7 +73,6 @@ document.getElementById("sendButton").addEventListener("click", function (event)
 });
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    scrollToBottom();
     document.addEventListener("keypress", function (event) {
         // Enter tuşunun keyCode değeri 13'tür
         if (event.keyCode === 13) {

@@ -42,16 +42,16 @@ connection.on("Send", function (message) {
     scrollToBottom();
 });
 
-connection.on("ReceiveMessage", (user, message) => {
-    var li = document.createElement("li");
-    li.classList.add("list-group-item");
+//connection.on("ReceiveMessage", (user, message) => {
+//    var li = document.createElement("li");
+//    li.classList.add("list-group-item");
 
-    var formattedTimestamp = new Date().toLocaleString('en-US', { hour12: true });
+//    var formattedTimestamp = new Date().toLocaleString('en-US', { hour12: true });
 
-    li.innerHTML = `<small class="text-muted">${formattedTimestamp}</small> <strong>${user}: </strong>${message}`;
-    document.getElementById("messageList").appendChild(li);
-    scrollToBottom();
-});
+//    li.innerHTML = `<small class="text-muted">${formattedTimestamp}</small> <strong>${user}: </strong>${message}`;
+//    document.getElementById("messageList").appendChild(li);
+//    scrollToBottom();
+//});
 
 document.getElementById("groupmsg").addEventListener("click", async (event) => {
     var groupName = document.getElementById("group-name").value;
@@ -122,7 +122,6 @@ document.getElementById("leave-group").addEventListener("click", async (event) =
 connection.start().then(() => { });
 
 document.addEventListener('DOMContentLoaded', (event) => {
-    scrollToBottom();
     document.addEventListener("keypress", function (event) {
         if (event.keyCode === 13) {
             document.getElementById("groupmsg").click();

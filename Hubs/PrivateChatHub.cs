@@ -57,6 +57,11 @@ namespace SignalrChatApp.Hubs
 
                 await Clients.Group(roomName).SendAsync("ReceiveMessage", sender, message);
             }
+            else
+            {
+                // Alıcı kullanıcı çevrimdışı
+                await Clients.Caller.SendAsync("ReceiveMessage", "System", $"{receiverUserName} is offline !!");
+            }
         }
 
         public string GetConnectionId() => Context.ConnectionId;
