@@ -37,3 +37,25 @@ To run this project on your system, ensure that you have the following prerequis
 - Double-check the connection string in `AppSettings.json` to avoid any connection issues.
 
 With these steps completed, your project should be ready to run. If you encounter any issues during setup, refer to the project contributors.
+
+## Project Screenshots:
+#### Login Page
+![login](https://github.com/omertayhan/SignalrChatApp/assets/62504339/75ee00bc-f07d-484d-80ce-5acfd6dbeef6)
+
+#### Register Page
+![register](https://github.com/omertayhan/SignalrChatApp/assets/62504339/7f8f1b39-9541-40d0-872e-00841ca04a60)
+
+#### Public Channel Page
+Communicate with anyone connected to the chat room.
+![public ](https://github.com/omertayhan/SignalrChatApp/assets/62504339/e0b500c6-a258-47fb-a9b1-9a337c46f879)
+
+#### Group Channel Page
+Communicate with users connected to a specific group.
+![group](https://github.com/omertayhan/SignalrChatApp/assets/62504339/c84ecf47-9676-45ec-a4d2-08f25dcbe9d6)
+
+#### Private Channel Page
+Communicate directly with another user.
+![private](https://github.com/omertayhan/SignalrChatApp/assets/62504339/00978db3-f6ea-4ffc-84bc-63ed1aae6d4b)
+
+
+
